@@ -19,4 +19,5 @@ export const RegisterSchema = z.object({
   name: z.string().min(1, {
     message: 'Name is Required',
   }),
+  isSubscribed: z.boolean().optional().default(false),
 })

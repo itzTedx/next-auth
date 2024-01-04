@@ -22,6 +22,7 @@ import { useState, useTransition } from 'react'
 import { FormError } from '../form-error'
 import { FormSuccess } from '../form-success'
 import { FaSpinner } from 'react-icons/fa'
+import { Checkbox } from '../ui/checkbox'
 
 const RegisterForm = () => {
   const [isPending, startTransition] = useTransition()
@@ -33,6 +34,7 @@ const RegisterForm = () => {
     defaultValues: {
       email: '',
       password: '',
+      isSubscribed: true,
     },
   })
 
@@ -112,9 +114,28 @@ const RegisterForm = () => {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="isSubscribed"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>
+                      Subscribe to Newsletter, Offers, Discount Notification
+                    </FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
           </div>
           <Button type="submit" disabled={isPending} className="w-full">
-            Log in{' '}
+            Create Account{' '}
             {isPending && <FaSpinner className="w-4 h-4 animate-spin ml-3" />}
           </Button>
           <FormError message={error} />
